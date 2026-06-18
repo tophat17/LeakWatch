@@ -119,9 +119,6 @@ LeakWatch needs the **Docker socket** (`/var/run/docker.sock`) mounted so it can
 
 LeakWatch works on a best-effort basis and can be wrong. Always double-check that your apps are using the internet the way you intend — especially anything privacy-sensitive.
 
-## Building / publishing your own image
-
-See **[PUBLISHING.md](PUBLISHING.md)** for building the image, pushing it to GHCR with the included GitHub Actions workflow, and submitting the template to Unraid Community Applications.
 
 ## License
 
