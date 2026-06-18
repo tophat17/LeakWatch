@@ -1,0 +1,15 @@
+.git
+.github
+__pycache__/
+**/__pycache__/
+*.pyc
+data/
+/data
+tests/
+screenshots/
+*.md
+!app/**
+.gitignore
+.dockerignore
+docker-compose.yml
+unraid/

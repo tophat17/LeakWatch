@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeakWatch</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🛡️</span>
+      <div>
+        <h1>LeakWatch</h1>
+        <p class="tagline">VPN leak detection for your Docker containers</p>
+      </div>
+    </div>
+    <div class="actions">
+      <span id="lastScan" class="last-scan"></span>
+      <button id="scanBtn" class="btn btn-primary">Scan all</button>
+    </div>
+  </header>
+
+  <section class="host-card" id="hostCard">
+    <div class="host-line">
+      <span class="host-label">Host public IP</span>
+      <span class="host-ip" id="hostIp">—</span>
+      <span class="host-org" id="hostOrg"></span>
+    </div>
+    <div class="host-note" id="hostNote"></div>
+  </section>
+
+  <section class="summary" id="summary"></section>
+
+  <div id="banner" class="banner hidden"></div>
+
+  <main>
+    <table class="grid" id="grid">
+      <thead>
+        <tr>
+          <th class="col-name">Container</th>
+          <th class="col-ip">Public IP</th>
+          <th class="col-provider">Provider</th>
+          <th class="col-net">Network</th>
+          <th class="col-status">Status</th>
+          <th class="col-act"></th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td colspan="6" class="empty">Loading containers…</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer class="foot">
+    <span class="disclaimer">LeakWatch works on a best guess and can be wrong &mdash; always double-check that your apps are using the internet safely.</span>
+    <span class="version" id="appVersion"></span>
+  </footer>
+
+  <div id="overlay" class="overlay hidden"></div>
+  <aside id="drawer" class="drawer hidden" aria-label="Container detail">
+    <div class="drawer-head">
+      <div>
+        <h2 id="drawerTitle">—</h2>
+        <div id="drawerSub" class="drawer-sub"></div>
+      </div>
+      <button id="drawerClose" class="btn btn-sm">✕</button>
+    </div>
+    <div id="drawerBody" class="drawer-body"></div>
+  </aside>
+
+  <div id="tooltip" class="tooltip hidden"></div>
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

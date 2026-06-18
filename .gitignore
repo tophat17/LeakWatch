@@ -1,0 +1,27 @@
+# Runtime data (per-container rules, scan cache)
+/data/
+data/
+*.sqlite
+*.sqlite3
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# screenshot raw originals (contain real IPs) + redaction helper scripts - never publish
+screenshots/raw*.png
+screenshots/_*.png
+/_redact.py
+/redact_final.py
+/redact.py

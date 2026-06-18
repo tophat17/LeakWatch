@@ -1,0 +1,28 @@
+# LeakWatch — generic (non-Unraid) deployment.
+#
+# Quick start:
+#   docker compose up -d
+#   open http://localhost:8080
+#
+# To build locally instead of pulling the published image, comment out `image:`
+# and uncomment `build: .`.
+services:
+  leakwatch:
+    image: ghcr.io/tophat17/leakwatch:latest
+    # build: .
+    container_name: leakwatch
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      # Required: lets LeakWatch list containers and run network probes.
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Persists per-container rules + scan cache.
+      - ./data:/data
+    environment:
+      - LEAKWATCH_HELPER_IMAGE=curlimages/curl:latest
+      - LEAKWATCH_PROBE_TIMEOUT=8
+      - LEAKWATCH_CONCURRENCY=4
+      - LEAKWATCH_INCLUDE_STOPPED=true
+      # Optional: free proxycheck.io key for sharper VPN-provider naming (1000/day). Leave blank to use the no-key tier.
+      - LEAKWATCH_PROXYCHECK_KEY=
