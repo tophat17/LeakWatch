@@ -102,16 +102,6 @@ For each container, LeakWatch starts a tiny throwaway helper container **inside 
 
 LeakWatch needs the **Docker socket** (`/var/run/docker.sock`) mounted so it can list your containers and run those probes. This grants Docker control of your server — standard for this class of tool (Portainer, Dockge, etc.). The helper containers are short-lived, run with `--cap-drop ALL` + `no-new-privileges`, and are removed after each probe. LeakWatch makes **no changes** to your containers; it only reads and tests.
 
----
-
-## Settings (all optional)
-
-| Variable | Default | What it does |
-|----------|---------|--------------|
-| `LEAKWATCH_PROXYCHECK_KEY` | *(empty)* | Free [proxycheck.io](https://proxycheck.io) key for sharper VPN-provider naming (1000 lookups/day). Works without one at a lower limit. |
-| `LEAKWATCH_HELPER_IMAGE` | `curlimages/curl:latest` | Image used for the network probe. |
-| `LEAKWATCH_PROBE_TIMEOUT` | `8` | Per-service network timeout (seconds). |
-| `LEAKWATCH_CONCURRENCY` | `4` | How many containers to test in parallel. |
 
 ---
 
