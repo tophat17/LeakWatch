@@ -24,7 +24,7 @@ logging.basicConfig(
 )
 log = logging.getLogger("leakwatch")
 
-APP_VERSION = "3.3.0"
+APP_VERSION = "3.4.0"
 
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
 

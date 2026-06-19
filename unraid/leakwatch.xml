@@ -13,11 +13,13 @@
 
 Building an *arr stack and not sure what needs a VPN? LeakWatch lists every container, tells you whether a VPN is REQUIRED (torrent/usenet), RECOMMENDED (indexers, *arr apps) or NOT NEEDED (Plex, dashboards, databases), and explains WHY in plain language. Then it checks each container's real public IP and flags anything that should be protected but is leaking your server's real IP.
 
+Zero configuration: just set the WebUI port and click Apply - everything else is preset. The scan runs automatically when you open the page.
+
 For new users it is a guide to safe setup; for experienced users it is a single dashboard to confirm everything is configured as expected and to catch a VPN that silently dropped.
 
-How it checks: a throwaway "sidecar" container runs inside each target's network namespace and reports the real exit IP (works even if the app has no curl/wget), cross-checked across several IP services. It best-effort names the VPN provider (Mullvad, NordVPN, Surfshark, Proton, PIA and more), detects tun/wg tunnels, recognises Tailscale/ZeroTier mesh networks, and includes an IPv6-leak and Tor-exit check.
+How it checks: a throwaway sidecar container runs inside each target's network namespace and reports the real exit IP (works even if the app has no curl/wget), cross-checked across several IP services. It best-effort names the VPN provider (Mullvad, NordVPN, Surfshark, Proton, PIA and more), detects tun/wg tunnels, recognises Tailscale/ZeroTier mesh networks, and includes an IPv6-leak and Tor-exit check.
 
-Requires the Docker socket to be mounted (read/write) so it can list and probe your containers. The scan runs automatically when you open the page.</Overview>
+Needs the Docker socket mounted (preset) so it can list and probe your containers. It only reads and tests - it never changes your containers.</Overview>
   <Category>Network:Management Security: Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/tophat17/LeakWatch/main/unraid/leakwatch.xml</TemplateURL>
@@ -28,8 +30,11 @@ Requires the Docker socket to be mounted (read/write) so it can list and probe y
   <DateInstalled/>
   <DonateText/>
   <DonateLink/>
-  <Description>Teaches which containers should be behind a VPN and why, then checks each one's real public IP and flags anything that should be protected but is leaking your server's real IP. Great for setting up and auditing an *arr stack.</Description>
+  <Description>Teaches which containers should be behind a VPN and why, then checks each one's real public IP and flags anything that should be protected but is leaking your server's real IP. Zero-config: just set the WebUI port. Great for setting up and auditing an *arr stack.</Description>
   <Changes>
+### 3.4.0
+- Zero-config install: the only setting is the WebUI port. The Docker socket, app-data path and all tuning options are preset (advanced) so a default install just works.
+
 ### 3.3.0
 - Accurate VPN-provider naming using a proxy-detection database (names Surfshark, Mullvad, NordVPN, Proton, PIA, and more).
 
@@ -87,11 +92,11 @@ Requires the Docker socket to be mounted (read/write) so it can list and probe y
       <Mode/>
     </Variable>
   </Environment>
-  <Config Name="WebUI Port" Target="8080" Default="8080" Mode="tcp" Description="Port for the LeakWatch web interface." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
-  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Required. Lets LeakWatch list your containers and run network probes. Grants Docker control - normal for this kind of tool." Type="Path" Display="always" Required="true" Mask="false">/var/run/docker.sock</Config>
-  <Config Name="App Data" Target="/data" Default="/mnt/user/appdata/leakwatch" Mode="rw" Description="Stores the scan cache." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/leakwatch</Config>
-  <Config Name="Helper Image" Target="LEAKWATCH_HELPER_IMAGE" Default="curlimages/curl:latest" Mode="" Description="Tiny image used to probe each container's network namespace." Type="Variable" Display="advanced" Required="false" Mask="false">curlimages/curl:latest</Config>
-  <Config Name="Probe Timeout (s)" Target="LEAKWATCH_PROBE_TIMEOUT" Default="8" Mode="" Description="Per-service network timeout in seconds." Type="Variable" Display="advanced" Required="false" Mask="false">8</Config>
-  <Config Name="Scan Concurrency" Target="LEAKWATCH_CONCURRENCY" Default="4" Mode="" Description="How many containers to test in parallel." Type="Variable" Display="advanced" Required="false" Mask="false">4</Config>
-  <Config Name="proxycheck.io API Key (optional)" Target="LEAKWATCH_PROXYCHECK_KEY" Default="" Mode="" Description="Optional free proxycheck.io key for sharper VPN-provider naming (1000 lookups/day). Works without a key at a lower limit." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="WebUI Port" Target="8080" Default="8080" Mode="tcp" Description="The only setting you need: the port for the LeakWatch web interface." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Preset. Lets LeakWatch list your containers and run network probes." Type="Path" Display="advanced" Required="true" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="App Data" Target="/data" Default="/mnt/user/appdata/leakwatch" Mode="rw" Description="Preset. Stores the scan cache (optional - the app works without it too)." Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/leakwatch</Config>
+  <Config Name="Helper Image" Target="LEAKWATCH_HELPER_IMAGE" Default="curlimages/curl:latest" Mode="" Description="Advanced. Tiny image used to probe each container's network namespace." Type="Variable" Display="advanced" Required="false" Mask="false">curlimages/curl:latest</Config>
+  <Config Name="Probe Timeout (s)" Target="LEAKWATCH_PROBE_TIMEOUT" Default="8" Mode="" Description="Advanced. Per-service network timeout in seconds." Type="Variable" Display="advanced" Required="false" Mask="false">8</Config>
+  <Config Name="Scan Concurrency" Target="LEAKWATCH_CONCURRENCY" Default="4" Mode="" Description="Advanced. How many containers to test in parallel." Type="Variable" Display="advanced" Required="false" Mask="false">4</Config>
+  <Config Name="proxycheck.io API Key (optional)" Target="LEAKWATCH_PROXYCHECK_KEY" Default="" Mode="" Description="Advanced/optional. Free proxycheck.io key for sharper VPN-provider naming (1000 lookups/day). Works without a key at a lower limit." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
 </Container>

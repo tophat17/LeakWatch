@@ -73,7 +73,7 @@ Getting this wrong is a real risk: a torrent or usenet client running on your **
 
 1. In Unraid, open the **Apps** tab (Community Applications).
 2. Search for **LeakWatch** and click **Install**.
-3. Leave the defaults (WebUI port `8080`, appdata at `/mnt/user/appdata/leakwatch`, and the Docker socket mapping) and click **Apply**.
+3. **Set the WebUI port** (default `8080`) and click **Apply** — that's the only setting. The Docker socket and everything else are preset.
 4. When it starts, open the **WebUI** from the Docker tab — it scans automatically.
 
 ### Add the template by URL (before it's in the CA store)
@@ -84,7 +84,7 @@ In **Docker → Add Container**, paste this into the **Template** field:
 https://raw.githubusercontent.com/tophat17/LeakWatch/main/unraid/leakwatch.xml
 ```
 
-…confirm the port, appdata path and Docker socket, then **Apply**.
+…set the **WebUI port** (everything else is preset), then **Apply**.
 
 <!-- ========================================================================
      📸 SCREENSHOT 3 (optional) — "ABOUT THIS APP" PANEL
