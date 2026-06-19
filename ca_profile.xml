@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Profile>
-  <Author>tophat17</Author>
-  <Maintainer>tophat17</Maintainer>
-  <Language Tag="en_US">English</Language>
-  <Repository>https://github.com/tophat17/LeakWatch</Repository>
+<Maintainer>
+  <Profile>
+    tophat17 — self-hosted tools for Unraid. LeakWatch teaches which of your Docker
+    containers should be behind a VPN and why, then checks each container's real
+    public IP and flags anything that should be protected but is leaking your
+    server's real IP. Zero-config and great for setting up or auditing an *arr stack.
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/tophat17/LeakWatch/main/icon.png</Icon>
   <Project>https://github.com/tophat17/LeakWatch</Project>
   <Support>https://github.com/tophat17/LeakWatch/issues</Support>
-  <Icon>https://raw.githubusercontent.com/tophat17/LeakWatch/main/icon.png</Icon>
-  <Description>LeakWatch teaches which of your Docker containers should be behind a VPN and why, then checks each container's real public IP and flags anything that should be protected but is leaking your server's real IP. Built for Unraid, and great for setting up or auditing an *arr stack.</Description>
-  <Date>2026-06-18</Date>
-</Profile>
+</Maintainer>
